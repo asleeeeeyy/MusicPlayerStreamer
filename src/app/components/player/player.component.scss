@@ -1,0 +1,55 @@
+.mini-player {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 99;
+  background: #232338;
+  display: flex;
+  align-items: center;
+  padding: 6px 12px;
+  box-shadow: 0 -2px 12px rgba(0,0,0,0.15);
+  cursor: pointer;
+}
+
+.mini-art {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.mini-info {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.mini-title {
+  font-weight: 500;
+  color: #fff;
+  font-size: 1.07rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mini-artist {
+  font-size: 0.95rem;
+  color: #bdbdbd;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mini-controls {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  z-index: 100;
+}
+ion-button[size="small"] {
+  --padding-start: 4px;
+  --padding-end: 4px;
+  --background: transparent;
+  --color: #fff;
+}

@@ -1,0 +1,84 @@
+<!-- pages/playlists/playlists.page.html -->
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" *ngIf="selectedPlaylist">
+      <ion-button (click)="backToPlaylists()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ selectedPlaylist ? selectedPlaylist.name : 'Playlists' }}</ion-title>
+    <ion-buttons slot="end" *ngIf="!selectedPlaylist">
+      <ion-button (click)="createPlaylist()">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Playlists List View -->
+  <div *ngIf="!selectedPlaylist">
+    <div *ngIf="playlists.length === 0" class="empty-state">
+      <ion-icon name="list-outline"></ion-icon>
+      <h2>No Playlists</h2>
+      <p>Create your first playlist by tapping the + button</p>
+    </div>
+
+    <ion-list *ngIf="playlists.length > 0">
+      <ion-item-sliding *ngFor="let playlist of playlists">
+        <ion-item (click)="selectPlaylist(playlist)">
+          <ion-icon name="list" slot="start"></ion-icon>
+          <ion-label>
+            <h2>{{ playlist.name }}</h2>
+            <p>{{ playlist.tracks.length }} tracks</p>
+          </ion-label>
+          <ion-note slot="end">
+            {{ playlist.updatedAt | date:'shortDate' }}
+          </ion-note>
+        </ion-item>
+
+        <ion-item-options side="end">
+          <ion-item-option color="primary" (click)="renamePlaylist(playlist, $event)">
+            <ion-icon slot="icon-only" name="create"></ion-icon>
+          </ion-item-option>
+          <ion-item-option color="danger" (click)="deletePlaylist(playlist, $event)">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </div>
+
+  <!-- Playlist Detail View -->
+  <div *ngIf="selectedPlaylist">
+    <div *ngIf="selectedPlaylist.tracks.length === 0" class="empty-state">
+      <ion-icon name="musical-notes-outline"></ion-icon>
+      <h2>No Tracks in Playlist</h2>
+      <p>Add tracks from Local or Streaming tabs</p>
+    </div>
+
+    <ion-list *ngIf="selectedPlaylist.tracks.length > 0">
+      <ion-item-sliding *ngFor="let track of selectedPlaylist.tracks">
+        <ion-item (click)="playTrack(track)">
+          <ion-thumbnail slot="start">
+            <img [src]="track.artwork || 'assets/placeholder-album.png'" alt="Album Art">
+          </ion-thumbnail>
+          <ion-label>
+            <h2>{{ track.title }}</h2>
+            <p>{{ track.artist }}</p>
+            <p *ngIf="track.album">{{ track.album }}</p>
+          </ion-label>
+          <ion-note slot="end">{{ track.duration | date:'mm:ss' }}</ion-note>
+        </ion-item>
+
+        <ion-item-options side="end">
+          <ion-item-option color="danger" (click)="removeTrackFromPlaylist(track, $event)">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </div>
+
+  <app-player></app-player>
+</ion-content>

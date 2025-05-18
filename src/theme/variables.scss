@@ -1,0 +1,117 @@
+/* theme/variables.scss */
+
+// For information on how to create your own theme, please see:
+// http://ionicframework.com/docs/theming/
+
+// Deezer-inspired color palette
+ :root {
+  // Primary colors
+  --ion-color-primary: #ef5466;
+  --ion-color-primary-rgb: 239, 84, 102;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #d24a5a;
+  --ion-color-primary-tint: #f16676;
+
+  // Secondary colors
+  --ion-color-secondary: #32323d;
+  --ion-color-secondary-rgb: 50, 50, 61;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #2c2c36;
+  --ion-color-secondary-tint: #474750;
+
+  // Tertiary colors
+  --ion-color-tertiary: #7a77ff;
+  --ion-color-tertiary-rgb: 122, 119, 255;
+  --ion-color-tertiary-contrast: #ffffff;
+  --ion-color-tertiary-contrast-rgb: 255, 255, 255;
+  --ion-color-tertiary-shade: #6b69e0;
+  --ion-color-tertiary-tint: #8788ff;
+
+  // Status colors
+  --ion-color-success: #2ce574;
+  --ion-color-success-rgb: 44, 229, 116;
+  --ion-color-success-contrast: #000000;
+  --ion-color-success-contrast-rgb: 0, 0, 0;
+  --ion-color-success-shade: #27c966;
+  --ion-color-success-tint: #41e882;
+
+  --ion-color-warning: #ffce00;
+  --ion-color-warning-rgb: 255, 206, 0;
+  --ion-color-warning-contrast: #000000;
+  --ion-color-warning-contrast-rgb: 0, 0, 0;
+  --ion-color-warning-shade: #e0b500;
+  --ion-color-warning-tint: #ffd31a;
+
+  --ion-color-danger: #ff4747;
+  --ion-color-danger-rgb: 255, 71, 71;
+  --ion-color-danger-contrast: #ffffff;
+  --ion-color-danger-contrast-rgb: 255, 255, 255;
+  --ion-color-danger-shade: #e03e3e;
+  --ion-color-danger-tint: #ff5959;
+
+  // Grayscale colors
+  --ion-color-light: #f4f5f8;
+  --ion-color-light-rgb: 244, 245, 248;
+  --ion-color-light-contrast: #000000;
+  --ion-color-light-contrast-rgb: 0, 0, 0;
+  --ion-color-light-shade: #d7d8da;
+  --ion-color-light-tint: #f5f6f9;
+
+  --ion-color-medium: #92949c;
+  --ion-color-medium-rgb: 146, 148, 156;
+  --ion-color-medium-contrast: #000000;
+  --ion-color-medium-contrast-rgb: 0, 0, 0;
+  --ion-color-medium-shade: #808289;
+  --ion-color-medium-tint: #9d9fa6;
+
+  --ion-color-dark: #222428;
+  --ion-color-dark-rgb: 34, 36, 40;
+  --ion-color-dark-contrast: #ffffff;
+  --ion-color-dark-contrast-rgb: 255, 255, 255;
+  --ion-color-dark-shade: #1e2023;
+  --ion-color-dark-tint: #383a3e;
+
+  // App-specific variables
+  --app-background-gradient-start: #191f45;
+  --app-background-gradient-end: #2c0d3e;
+  --app-card-background: rgba(255, 255, 255, 0.08);
+  --app-card-border: rgba(255, 255, 255, 0.1);
+  --app-text-primary: #ffffff;
+  --app-text-secondary: rgba(255, 255, 255, 0.7);
+  --app-text-tertiary: rgba(255, 255, 255, 0.5);
+  --app-divider-color: rgba(255, 255, 255, 0.1);
+  --app-player-background: rgba(25, 31, 69, 0.85);
+  --app-tab-bar-background: rgba(25, 31, 69, 0.9);
+}
+
+// Dark theme (default for this app)
+body {
+  // Background and text
+  --ion-background-color: var(--app-background-gradient-start);
+  --ion-background-color-rgb: 25, 31, 69;
+  --ion-text-color: var(--app-text-primary);
+  --ion-text-color-rgb: 255, 255, 255;
+  
+  // Toolbar
+  --ion-toolbar-background: transparent;
+  --ion-toolbar-border-color: var(--app-divider-color);
+  
+  // Items
+  --ion-item-background: transparent;
+  --ion-item-background-activated: rgba(255, 255, 255, 0.05);
+  --ion-item-border-color: var(--app-divider-color);
+  
+  // Tab bar
+  --ion-tab-bar-background: var(--app-tab-bar-background);
+  --ion-tab-bar-border-color: transparent;
+}
+
+// Apply gradient background to body
+body {
+  background: linear-gradient(to bottom, 
+    var(--app-background-gradient-start), 
+    var(--app-background-gradient-end));
+  min-height: 100vh;
+}

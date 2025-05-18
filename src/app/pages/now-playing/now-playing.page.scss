@@ -1,0 +1,103 @@
+.nowplaying-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* centers vertically if space allows */
+  background: #181a22;
+  padding: 24px 0 12px 0;
+}
+
+.full-art {
+  width: 80vw;
+  max-width: 340px;
+  height: 80vw;
+  max-height: 340px;
+  border-radius: 18px;
+  object-fit: cover;
+  box-shadow: 0 6px 30px rgba(0,0,0,0.18);
+  margin-bottom: 18px;
+}
+
+.full-info {
+  text-align: center;
+  margin-bottom: 10px;
+  h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+    margin: 0 0 2px 0;
+  }
+  .artist, .album {
+    font-size: 1.1rem;
+    color: #bdbdbd;
+    margin: 0;
+  }
+}
+
+.progress-container {
+  width: 100%;
+  max-width: 340px;
+  margin: 10px 0 0 0;
+}
+.time-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+  span {
+    min-width: 38px;
+    text-align: center;
+    font-size: 1rem;
+    color: #ccc;
+  }
+  ion-range {
+    flex: 1;
+    margin: 0 8px;
+    --bar-background: #fff3;
+    --bar-background-active: #fff;
+    --knob-background: #fff;
+    height: 8px;
+  }
+}
+
+.controls-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  margin: 32px 0 16px 0;
+}
+.skip-btn ion-icon {
+  font-size: 2rem;
+}
+.play-btn {
+  width: 72px;
+  height: 72px;
+  font-size: 2.8rem;
+  border-radius: 50%;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.13);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.volume-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 90%;
+  max-width: 330px;
+  margin: 0 auto;
+  color: #fff;
+  ion-icon {
+    font-size: 1.5rem;
+  }
+  ion-range {
+    flex: 1;
+    --bar-background: #fff3;
+    --bar-background-active: #fff;
+    --knob-background: #fff;
+    margin: 0 6px;
+  }
+}

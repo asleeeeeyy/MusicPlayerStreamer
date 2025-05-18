@@ -1,0 +1,103 @@
+<!-- pages/streaming/streaming.page.html -->
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Streaming</ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar [(ngModel)]="searchQuery" 
+                  (ionChange)="searchTracks()"
+                  placeholder="Search for tracks">
+    </ion-searchbar>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="selectedGenre" (ionChange)="loadTracksByGenre()">
+      <ion-segment-button value="all">
+        <ion-label>All</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="rock">
+        <ion-label>Rock</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="pop">
+        <ion-label>Pop</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="electronic">
+        <ion-label>Electronic</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="isLoading" class="loading-container">
+    <ion-spinner name="circles"></ion-spinner>
+    <p>Loading tracks...</p>
+  </div>
+
+  <div *ngIf="searchResults.length > 0">
+    <ion-list-header>
+      <ion-label>Search Results</ion-label>
+      <ion-button size="small" fill="clear" (click)="clearSearch()">
+        Clear
+      </ion-button>
+    </ion-list-header>
+
+    <ion-list>
+      <ion-item-sliding *ngFor="let track of searchResults">
+        <ion-item (click)="playTrack(track)">
+          <ion-thumbnail slot="start">
+            <img [src]="track.artwork || 'assets/placeholder-album.png'" alt="Album Art">
+          </ion-thumbnail>
+          <ion-label>
+            <h2>{{ track.title }}</h2>
+            <p>{{ track.artist }}</p>
+            <p *ngIf="track.album">{{ track.album }}</p>
+          </ion-label>
+          <ion-note slot="end">{{ track.duration | date:'mm:ss' }}</ion-note>
+        </ion-item>
+
+        <ion-item-options side="end">
+          <ion-item-option (click)="addToPlaylist(track)">
+            <ion-icon slot="icon-only" name="add"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </div>
+
+  <div *ngIf="!isLoading && searchResults.length === 0">
+    <ion-list-header>
+      <ion-label>Popular Tracks</ion-label>
+    </ion-list-header>
+
+    <ion-list *ngIf="popularTracks.length > 0">
+      <ion-item-sliding *ngFor="let track of popularTracks">
+        <ion-item (click)="playTrack(track)">
+          <ion-thumbnail slot="start">
+            <img [src]="track.artwork || 'assets/placeholder-album.png'" alt="Album Art">
+          </ion-thumbnail>
+          <ion-label>
+            <h2>{{ track.title }}</h2>
+            <p>{{ track.artist }}</p>
+            <p *ngIf="track.album">{{ track.album }}</p>
+          </ion-label>
+          <ion-note slot="end">{{ track.duration | date:'mm:ss' }}</ion-note>
+        </ion-item>
+
+        <!-- pages/streaming/streaming.page.html (continued) -->
+        <ion-item-options side="end">
+          <ion-item-option (click)="addToPlaylist(track)">
+            <ion-icon slot="icon-only" name="add"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+
+    <div *ngIf="popularTracks.length === 0" class="empty-state">
+      <ion-icon name="cloud-offline-outline"></ion-icon>
+      <h2>No Tracks Found</h2>
+      <p>Try a different genre or check your connection</p>
+    </div>
+  </div>
+
+  <app-player></app-player>
+</ion-content>

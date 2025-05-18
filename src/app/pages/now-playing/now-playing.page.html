@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Now Playing</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="playerState?.currentTrack as track" class="nowplaying-container">
+    <img [src]="track.artwork || 'assets/placeholder-album.png'" class="full-art" alt="Artwork" />
+
+    <div class="full-info">
+      <h2>{{ track.title }}</h2>
+      <p class="artist">{{ track.artist }}</p>
+      <p class="album" *ngIf="track.album">{{ track.album }}</p>
+    </div>
+
+    <div class="progress-container">
+      <div class="time-row">
+        <span>{{ formatTime(playerState?.currentTime || 0) }}</span>
+        <ion-range
+          [value]="playerState?.currentTime"
+          [max]="playerState?.duration || 100"
+          (ionChange)="seek($event)"
+          class="progress-bar"
+        ></ion-range>
+        <span>{{ formatTime(playerState?.duration || 0) }}</span>
+      </div>
+    </div>
+
+    <div class="controls-row">
+      <ion-button fill="clear" (click)="toggleShuffle()" [color]="playerState?.shuffle ? 'primary' : 'medium'">
+        <ion-icon [name]="playerState?.shuffle ? 'shuffle' : 'shuffle-outline'"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" (click)="previousTrack()" class="skip-btn">
+        <ion-icon name="play-skip-back"></ion-icon>
+      </ion-button>
+      <ion-button fill="solid" shape="round" (click)="togglePlayPause()" class="play-btn" color="primary">
+        <ion-icon [name]="playerState?.isPlaying ? 'pause' : 'play'"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" (click)="nextTrack()" class="skip-btn">
+        <ion-icon name="play-skip-forward"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" (click)="toggleRepeat()" [color]="playerState?.repeat !== 'off' ? 'primary' : 'medium'">
+        <ion-icon *ngIf="playerState?.repeat === 'one'" name="repeat-one"></ion-icon>
+        <ion-icon *ngIf="playerState?.repeat === 'all'" name="repeat"></ion-icon>
+        <ion-icon *ngIf="playerState?.repeat === 'off'" name="repeat-outline"></ion-icon>
+      </ion-button>
+    </div>
+
+    <div class="volume-row">
+      <ion-icon name="volume-low"></ion-icon>
+      <ion-range min="0" max="1" step="0.01" [value]="playerState?.volume || 1" (ionChange)="setVolume($event)"></ion-range>
+      <ion-icon name="volume-high"></ion-icon>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,81 @@
+<!-- pages/settings/settings.page.html -->
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Settings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="settings">
+    <ion-list-header>
+      <ion-label>Appearance</ion-label>
+    </ion-list-header>
+    
+    <ion-item>
+      <ion-icon name="moon-outline" slot="start"></ion-icon>
+      <ion-label>Dark Theme</ion-label>
+      <ion-toggle [(ngModel)]="settings.theme" 
+                 (ionChange)="toggleTheme()"
+                 [checked]="settings.theme === 'dark'">
+      </ion-toggle>
+    </ion-item>
+    
+    <ion-list-header>
+      <ion-label>Audio</ion-label>
+    </ion-list-header>
+    
+    <ion-item>
+      <ion-icon name="volume-high-outline" slot="start"></ion-icon>
+      <ion-label>Volume</ion-label>
+      <ion-range [(ngModel)]="volume" 
+                min="0" 
+                max="1" 
+                step="0.1"
+                (ionChange)="setVolume($event)">
+      </ion-range>
+    </ion-item>
+    
+    <ion-item>
+      <ion-icon name="options-outline" slot="start"></ion-icon>
+      <ion-label>Equalizer</ion-label>
+      <ion-toggle [(ngModel)]="settings.equalizer.enabled" 
+                 (ionChange)="toggleEqualizer()">
+      </ion-toggle>
+    </ion-item>
+    
+    <ion-item *ngIf="settings.equalizer.enabled">
+      <ion-label>Equalizer Preset</ion-label>
+      <ion-select [(ngModel)]="settings.equalizer.currentPreset" 
+                 (ionChange)="changeEqualizerPreset(settings.equalizer.currentPreset)">
+        <ion-select-option value="flat">Flat</ion-select-option>
+        <ion-select-option value="rock">Rock</ion-select-option>
+        <ion-select-option value="pop">Pop</ion-select-option>
+        <ion-select-option value="jazz">Jazz</ion-select-option>
+        <ion-select-option value="classical">Classical</ion-select-option>
+      </ion-select>
+    </ion-item>
+    
+    <ion-item>
+      <ion-icon name="speedometer-outline" slot="start"></ion-icon>
+      <ion-label>Audio Quality</ion-label>
+      <ion-select [(ngModel)]="settings.audioQuality" 
+                 (ionChange)="changeAudioQuality(settings.audioQuality)">
+        <ion-select-option value="low">Low</ion-select-option>
+        <ion-select-option value="medium">Medium</ion-select-option>
+        <ion-select-option value="high">High</ion-select-option>
+      </ion-select>
+    </ion-item>
+    
+    <ion-list-header>
+      <ion-label>About</ion-label>
+    </ion-list-header>
+    
+    <ion-item>
+      <ion-icon name="information-circle-outline" slot="start"></ion-icon>
+      <ion-label>
+        <h2>Music Player App</h2>
+        <p>Version 1.0.0</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

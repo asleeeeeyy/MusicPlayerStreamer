@@ -1,0 +1,23 @@
+<div *ngIf="playerState?.currentTrack as track">
+  <!-- MINI PLAYER (fixed at bottom, tap anywhere else to open Now Playing) -->
+  <div class="mini-player" (click)="goToNowPlaying()">
+    <img [src]="track.artwork || 'assets/placeholder-album.png'" class="mini-art" alt="Art">
+
+    <div class="mini-info">
+      <span class="mini-title">{{ track.title }}</span>
+      <span class="mini-artist">{{ track.artist }}</span>
+    </div>
+
+    <div class="mini-controls" (click)="$event.stopPropagation()">
+      <ion-button fill="clear" size="small" (click)="previousTrack()">
+        <ion-icon name="play-skip-back"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" size="small" (click)="togglePlayPause()">
+        <ion-icon [name]="playerState?.isPlaying ? 'pause' : 'play'"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" size="small" (click)="nextTrack()">
+        <ion-icon name="play-skip-forward"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+</div>

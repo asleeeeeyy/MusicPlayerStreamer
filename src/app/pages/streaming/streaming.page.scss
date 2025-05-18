@@ -1,0 +1,195 @@
+/* pages/streaming/streaming.page.scss */
+
+// Import theme variables
+@import '../../../theme/variables.scss';
+
+:host {
+  .streaming-page {
+    // Header Section
+    .header-section {
+      padding: 16px;
+      
+      h1 {
+        font-size: 28px;
+        font-weight: 700;
+        margin: 0 0 8px;
+        color: var(--app-text-primary);
+      }
+      
+      p {
+        font-size: 16px;
+        color: var(--app-text-secondary);
+        margin: 0;
+      }
+    }
+    
+    // Search Bar
+    .search-bar {
+      padding: 0 16px 16px;
+      
+      ion-searchbar {
+        --background: var(--app-card-background);
+        --color: var(--app-text-primary);
+        --placeholder-color: var(--app-text-tertiary);
+        --icon-color: var(--app-text-tertiary);
+        --border-radius: 12px;
+        --box-shadow: none;
+        padding: 0;
+      }
+    }
+    
+    // Featured Section
+    .featured-section {
+      margin-bottom: 24px;
+      
+      .section-header {
+        padding: 0 16px 12px;
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--app-text-primary);
+        margin: 0;
+      }
+      
+      .featured-carousel {
+        padding: 0 16px;
+        overflow-x: auto;
+        display: flex;
+        gap: 16px;
+        
+        &::-webkit-scrollbar {
+          display: none;
+        }
+        
+        .featured-item {
+          flex: 0 0 auto;
+          width: 280px;
+          border-radius: 12px;
+          overflow: hidden;
+          position: relative;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+          
+          img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+          }
+          
+          .featured-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 16px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            
+            h3 {
+              font-size: 18px;
+              font-weight: 700;
+              color: white;
+              margin: 0 0 4px;
+            }
+            
+            p {
+              font-size: 14px;
+              color: rgba(255, 255, 255, 0.8);
+              margin: 0;
+            }
+          }
+        }
+      }
+    }
+    
+    // Genres Grid
+    .genres-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      padding: 0 16px 16px;
+      
+      .genre-card {
+        height: 100px;
+        border-radius: 12px;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+        
+        .genre-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0, 0, 0, 0.4);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          
+          h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: white;
+            margin: 0;
+            text-align: center;
+          }
+        }
+      }
+    }
+    
+    // Top Tracks
+    .top-tracks {
+      padding: 0 0 16px;
+      
+      .section-header {
+        padding: 0 16px 12px;
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--app-text-primary);
+        margin: 0;
+      }
+      
+      ion-item {
+        --padding-start: 16px;
+        --padding-end: 16px;
+        --padding-top: 8px;
+        --padding-bottom: 8px;
+        
+        .track-rank {
+          font-size: 16px;
+          font-weight: 700;
+          color: var(--app-text-tertiary);
+          min-width: 24px;
+          text-align: center;
+          margin-right: 12px;
+        }
+        
+        ion-thumbnail {
+          --size: 48px;
+          margin-right: 12px;
+        }
+        
+        ion-label {
+          h2 {
+            font-size: 14px;
+            font-weight: 600;
+            margin: 0 0 4px;
+          }
+          
+          p {
+            font-size: 12px;
+          }
+        }
+        
+        ion-note {
+          font-size: 12px;
+          padding-right: 8px;
+        }
+      }
+    }
+  }
+}
