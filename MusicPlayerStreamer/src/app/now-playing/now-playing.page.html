@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Now Playing</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="now-playing-content">
+  <div class="content-wrapper">
+    <div class="artwork-container">
+      <img [src]="currentTrack?.image || 'assets/default-album.jpg'" alt="Album Artwork">
+    </div>
+    
+    <div class="track-info">
+      <h2>{{ currentTrack?.title || 'No Track Playing' }}</h2>
+      <p>{{ currentTrack?.artist || 'Unknown Artist' }}</p>
+    </div>
+    
+    <div class="time-container">
+      <span>{{ formatTime(currentTime) }}</span>
+      <ion-range 
+        [value]="currentTime" 
+        [max]="duration || 1" 
+        (ionChange)="onSeek($event)">
+      </ion-range>
+      <span>{{ formatTime(duration) }}</span>
+    </div>
+    
+    <div class="controls">
+      <ion-button fill="clear" class="control-button" (click)="onPlayPrevious($event)">
+        <ion-icon name="play-skip-back"></ion-icon>
+      </ion-button>
+      <ion-button class="play-button" (click)="onTogglePlayPause($event)">
+        <ion-icon [name]="isPlaying ? 'pause' : 'play'"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" class="control-button" (click)="onPlayNext($event)">
+        <ion-icon name="play-skip-forward"></ion-icon>
+      </ion-button>
+      <!-- Add to Playlist Button, same style as the others -->
+      <ion-button fill="clear" class="control-button" (click)="onAddToPlaylist()">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

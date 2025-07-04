@@ -1,0 +1,29 @@
+<ion-footer
+  *ngIf="currentTrack"
+  class="mini-player-footer"
+  style="position: fixed; bottom: 56px; width: 100%; z-index: 20; cursor: pointer;"
+  (click)="goToNowPlaying.emit()"
+>
+  <ion-toolbar>
+    <ion-item lines="none">
+      <ion-thumbnail slot="start">
+        <img [src]="currentTrack.image || 'assets/placeholder.png'" alt="Album art" />
+      </ion-thumbnail>
+      <ion-label>
+        <h3>{{ currentTrack.title }}</h3>
+        <p>{{ currentTrack.artist }}</p>
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" (click)="playPrevious.emit(); $event.stopPropagation()">
+          <ion-icon name="play-skip-back"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" (click)="togglePlayPause.emit(); $event.stopPropagation()">
+          <ion-icon [name]="isPlaying ? 'pause' : 'play'"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" (click)="playNext.emit(); $event.stopPropagation()">
+          <ion-icon name="play-skip-forward"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-toolbar>
+</ion-footer>

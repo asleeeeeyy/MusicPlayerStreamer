@@ -1,0 +1,87 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Playlists</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- When a playlist is selected, show its tracks -->
+  <ng-container *ngIf="selectedPlaylist; else playlistList">
+    <ion-item lines="full" class="selected-playlist">
+      <ion-label>
+        <h2>{{ selectedPlaylist.name }}</h2>
+        <p>{{ selectedPlaylist.tracks.length }} song{{ selectedPlaylist.tracks.length === 1 ? '' : 's' }}</p>
+      </ion-label>
+      <ion-button fill="clear" slot="end" (click)="backToList()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+    <ion-list *ngIf="selectedPlaylist.tracks.length > 0">
+      <ion-item *ngFor="let track of selectedPlaylist.tracks" (click)="playTrack(track)" button class="playlist-item">
+        <ion-thumbnail slot="start">
+          <img [src]="track.image || 'assets/placeholder.png'" />
+        </ion-thumbnail>
+        <ion-label>
+          <h2 class="playlist-title">{{ track.title }}</h2>
+          <p class="playlist-sub">{{ track.artist }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-text *ngIf="selectedPlaylist.tracks.length === 0" color="medium">
+      <p class="ion-padding">No songs yet in this playlist.</p>
+    </ion-text>
+  </ng-container>
+
+  <!-- Playlist list (default view) -->
+  <ng-template #playlistList>
+    <ion-list *ngIf="playlists.length > 0">
+      <ion-item *ngFor="let playlist of playlists" (click)="selectPlaylist(playlist)" button class="playlist-item">
+        <ion-label>
+          <h2 class="playlist-title">{{ playlist.name }}</h2>
+          <p class="playlist-sub">{{ playlist.tracks.length }} song{{ playlist.tracks.length === 1 ? '' : 's' }}</p>
+        </ion-label>
+        <ion-button fill="clear" color="danger" slot="end" (click)="removePlaylist(playlist.name); $event.stopPropagation()">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-list>
+    <ion-text *ngIf="playlists.length === 0" color="medium">
+      <p class="ion-padding">No playlists yet. Create one below!</p>
+    </ion-text>
+    <!-- Styled "Create Playlist" Button -->
+    <div class="create-playlist-btn-wrapper">
+      <ion-button expand="block" color="secondary" class="create-playlist-btn" (click)="addPlaylist()">
+        <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+        Create Playlist
+      </ion-button>
+    </div>
+  </ng-template>
+
+  <!-- Mini Player -->
+  <app-mini-player
+    [currentTrack]="playerService.currentTrack$ | async"
+    [isPlaying]="(playerService.isPlaying$ | async) ?? false"
+    (playPrevious)="playerService.playPrevious()"
+    (togglePlayPause)="playerService.togglePlayPause()"
+    (playNext)="playerService.playNext()"
+    (goToNowPlaying)="gotoTab('now-playing')"
+  ></app-mini-player>
+
+  <!-- Tab Bar at the bottom -->
+  <ion-footer class="main-tab-footer">
+    <ion-tab-bar>
+      <ion-tab-button [selected]="false" (click)="gotoTab('home')">
+        <ion-icon name="search"></ion-icon>
+        <ion-label>Discover</ion-label>
+      </ion-tab-button>
+      <ion-tab-button [selected]="false" (click)="gotoTab('local-music')">
+        <ion-icon name="folder"></ion-icon>
+        <ion-label>Local Files</ion-label>
+      </ion-tab-button>
+      <ion-tab-button [selected]="true" (click)="gotoTab('playlists')">
+        <ion-icon name="list"></ion-icon>
+        <ion-label>Playlist</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-footer>
+</ion-content>

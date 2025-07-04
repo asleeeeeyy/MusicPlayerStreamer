@@ -1,0 +1,401 @@
+// Variables - Rich Purple Gradient Color Palette
+$primary-purple: #9c27b0;
+$secondary-purple: #6a11cb;
+$deep-purple: #30197d;
+$darker-purple: #1f1135;
+$light-text: #ffffff;
+$medium-text: #d1c4e9;
+$tab-indicator: #bb86fc;
+$card-bg: rgba(255, 255, 255, 0.08);
+$header-gradient: linear-gradient(to right, #6a11cb, #8e2de2);
+$background-gradient: linear-gradient(to bottom, #30197d, #1f1135);
+$active-segment-bg: rgba(255, 255, 255, 0.15);
+
+// Global Styles
+:root {
+  --ion-background-color: transparent;
+  --ion-text-color: #{$light-text};
+  --ion-color-primary: #bb86fc;
+  --ion-color-secondary: #03dac6;
+  --ion-toolbar-background: #{$header-gradient};
+  --ion-item-background: transparent;
+}
+
+body {
+  background: $background-gradient;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+// Header
+ion-header {
+  ion-toolbar {
+    --background: #{$header-gradient};
+    --border-color: transparent;
+    
+    ion-title {
+      font-weight: 700;
+      font-size: 1.3rem;
+      letter-spacing: 0.5px;
+      text-align: center;
+      color: $light-text;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      padding: 12px 0;
+    }
+  }
+}
+
+// Content
+ion-content {
+  --background: #{$background-gradient};
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 16px;
+  --padding-bottom: 16px;
+  
+  // Search bar
+  ion-searchbar {
+    --background: rgba(255, 255, 255, 0.1);
+    --color: #{$light-text};
+    --placeholder-color: #{$medium-text};
+    --icon-color: #{$light-text};
+    --clear-button-color: #{$medium-text};
+    --border-radius: 24px;
+    padding: 0;
+    margin-bottom: 16px;
+    height: 48px;
+    
+    .searchbar-input {
+      background: rgba(255, 255, 255, 0.1);
+      color: $light-text;
+      font-size: 16px;
+      padding-left: 16px;
+      border-radius: 24px;
+    }
+    
+    .searchbar-search-icon {
+      color: $medium-text;
+    }
+  }
+  
+  // Segment controls
+  ion-segment {
+    background: transparent;
+    margin-bottom: 16px;
+    border-radius: 8px;
+    overflow: hidden;
+    
+    ion-segment-button {
+      --background: rgba(255, 255, 255, 0.05);
+      --background-checked: #{$active-segment-bg};
+      --color: #{$medium-text};
+      --color-checked: #{$light-text};
+      --indicator-color: transparent;
+      min-height: 40px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: none;
+      font-size: 14px;
+      border-radius: 8px;
+      margin: 0;
+      
+      &::part(indicator) {
+        display: none;
+      }
+      
+      &.segment-button-checked {
+        font-weight: 700;
+      }
+    }
+  }
+  
+  // Loading spinner
+  .spinner-center {
+    display: block;
+    margin: 20px auto;
+    color: $tab-indicator;
+  }
+  
+  // Lists
+  ion-list {
+    background: transparent;
+    padding: 0;
+    
+    ion-list-header {
+      background: transparent;
+      color: $light-text;
+      font-weight: 700;
+      font-size: 18px;
+      padding-left: 0;
+      margin-bottom: 8px;
+    }
+    
+    ion-item {
+      --background: #{$card-bg};
+      --color: #{$light-text};
+      --border-color: transparent;
+      --padding-start: 8px;
+      --padding-end: 8px;
+      --inner-padding-end: 8px;
+      margin-bottom: 8px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      
+      ion-thumbnail {
+        --border-radius: 8px;
+        width: 56px;
+        height: 56px;
+        margin: 8px;
+        
+        img {
+          border-radius: 8px;
+          object-fit: cover;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+      }
+      
+      ion-label {
+        h2 {
+          font-weight: 600;
+          margin-bottom: 4px;
+          color: $light-text;
+          font-size: 16px;
+        }
+        
+        p {
+          color: $medium-text;
+          font-size: 14px;
+          margin: 0;
+        }
+      }
+    }
+  }
+  
+  // No results message
+  .no-results {
+    text-align: center;
+    color: $medium-text;
+    margin-top: 40px;
+    font-size: 16px;
+  }
+  
+  // Local tab button
+  ion-button[color="secondary"] {
+    margin: 16px 0;
+    --border-radius: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    height: 48px;
+    --box-shadow: 0 4px 8px rgba(3, 218, 198, 0.2);
+  }
+}
+
+// Mini player - positioned ABOVE tab bar
+ion-footer.mini-player-footer {
+  position: fixed;
+  bottom: 56px; // Height of tab bar
+  left: 0;
+  right: 0;
+  z-index: 999;
+  
+  ion-toolbar {
+    --background: rgba(106, 17, 203, 0.9);
+    --border-color: transparent;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    
+    ion-item {
+      --background: transparent;
+      --padding-start: 8px;
+      --padding-end: 8px;
+      --inner-padding-end: 8px;
+      
+      ion-thumbnail {
+        --border-radius: 6px;
+        width: 48px;
+        height: 48px;
+        margin: 8px;
+        
+        img {
+          border-radius: 6px;
+          object-fit: cover;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+      }
+      
+      ion-label {
+        h3 {
+          font-weight: 600;
+          margin-bottom: 2px;
+          color: $light-text;
+          font-size: 0.95rem;
+        }
+        
+        p {
+          color: rgba(255, 255, 255, 0.8);
+          font-size: 0.8rem;
+        }
+      }
+      
+      ion-buttons {
+        ion-button {
+          --color: #{$light-text};
+          --padding-start: 8px;
+          --padding-end: 8px;
+          
+          ion-icon {
+            font-size: 24px;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Tab Bar - fixed at bottom with bigger aligned buttons
+ion-footer:not(.mini-player-footer) {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: $darker-purple;
+  z-index: 998;
+  
+  ion-toolbar {
+    --background: #{$darker-purple};
+    --border-color: transparent;
+    padding: 0;
+    height: 56px; // increased height for spacing
+    
+    ion-segment {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 30px;
+      margin: 8px 20px;
+      height: 44px; // larger segment container
+      
+      ion-segment-button {
+        --background: transparent;
+        --background-checked: rgba(255, 255, 255, 0.3);
+        --color: #{$medium-text};
+        --color-checked: #{$light-text};
+        --indicator-color: transparent;
+        
+        min-height: 40px;
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: 0.6px;
+        text-transform: none;
+        padding: 0 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 30px;
+        margin: 4px 6px;
+        
+        // Buttons expand evenly with min width
+        flex: 1 1 auto;
+        min-width: 120px;
+        
+        &::part(indicator) {
+          display: none;
+        }
+        
+        &.segment-button-checked {
+          font-weight: 700;
+        }
+      }
+    }
+  }
+}
+
+// iOS safe area handling
+.ios {
+  ion-footer:not(.mini-player-footer) {
+    padding-bottom: env(safe-area-inset-bottom, 0);
+    height: calc(56px + env(safe-area-inset-bottom, 0));
+  }
+  
+  ion-footer.mini-player-footer {
+    bottom: calc(56px + env(safe-area-inset-bottom, 0));
+  }
+}
+
+// Media queries for different device sizes
+@media (min-width: 768px) {
+  ion-content {
+    --padding-start: 24px;
+    --padding-end: 24px;
+  }
+  
+  ion-footer:not(.mini-player-footer) {
+    ion-toolbar {
+      ion-segment {
+        max-width: 400px;
+        margin: 8px auto;
+      }
+    }
+  }
+}
+
+// Dark mode adjustments
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ion-color-step-50: #0d0d0d;
+    --ion-color-step-100: #1a1a1a;
+    --ion-color-step-150: #262626;
+    --ion-color-step-200: #333333;
+    --ion-color-step-250: #404040;
+    --ion-color-step-300: #4d4d4d;
+    --ion-color-step-350: #595959;
+    --ion-color-step-400: #666666;
+    --ion-color-step-450: #737373;
+    --ion-color-step-500: #808080;
+    --ion-color-step-550: #8c8c8c;
+    --ion-color-step-600: #999999;
+    --ion-color-step-650: #a6a6a6;
+    --ion-color-step-700: #b3b3b3;
+    --ion-color-step-750: #bfbfbf;
+    --ion-color-step-800: #cccccc;
+    --ion-color-step-850: #d9d9d9;
+    --ion-color-step-900: #e6e6e6;
+    --ion-color-step-950: #f2f2f2;
+  }
+}
+
+// Tab Bar - Discover & Local Files footer styles
+ion-footer:not(.mini-player-footer) {
+  background: $darker-purple;
+  box-shadow: 0 -2px 16px 0 rgba(0,0,0,0.12);
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+  overflow: hidden;
+
+  ion-tab-bar {
+    background: $darker-purple;
+    height: 56px;
+    padding: 0 6vw;
+
+    ion-tab-button {
+      background: transparent;
+      color: $medium-text;
+      flex-direction: column;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      transition: color 0.18s;
+      font-size: 13px;
+
+      ion-icon {
+        font-size: 22px;
+        margin-bottom: 2px;
+      }
+
+      &.tab-selected, &[aria-selected="true"] {
+        color: $light-text;
+        border-top: 3px solid $primary-purple;
+        background: rgba(156, 39, 176, 0.08);
+        font-weight: 700;
+      }
+    }
+  }
+}

@@ -1,0 +1,238 @@
+// Variables - Rich Purple Color Palette
+$musify-purple: #9c27b0; // The exact purple from the Musify header
+$primary-purple: #9c27b0;
+$secondary-purple: #6a11cb;
+$deep-purple: #30197d;
+$darker-purple: #1f1135;
+$light-text: #ffffff;
+$medium-text: #d1c4e9;
+$tab-indicator: #bb86fc;
+$card-bg: rgba(255, 255, 255, 0.08);
+$header-gradient: linear-gradient(to right, #6a11cb, #8e2de2);
+$background-gradient: linear-gradient(to bottom, #30197d, #1f1135);
+$active-segment-bg: rgba(255, 255, 255, 0.15);
+
+// Global Styles for Now Playing Page
+:host {
+  --ion-background-color: transparent;
+  --ion-text-color: #{$light-text};
+  --ion-color-primary: #bb86fc;
+  --ion-color-secondary: #03dac6;
+  --ion-toolbar-background: #{$musify-purple};
+  --ion-item-background: transparent;
+}
+
+// Header
+ion-header {
+  ion-toolbar {
+    --background: #{$musify-purple};
+    --border-color: transparent;
+    
+    ion-title {
+      font-weight: 700;
+      font-size: 1.3rem;
+      letter-spacing: 0.5px;
+      text-align: center;
+      color: $light-text;
+      padding: 12px 0;
+    }
+    
+    ion-back-button {
+      --color: #{$light-text};
+    }
+  }
+}
+
+// Content
+.now-playing-content {
+  --background: #{$background-gradient};
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 16px;
+  --padding-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; // Centers content vertically
+  text-align: center;
+  height: 100%;
+  
+  // Content wrapper for better vertical centering
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex: 1;
+    margin: auto 0;
+  }
+  
+  // Artwork container
+  .artwork-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 24px auto;
+    width: 80%;
+    max-width: 300px;
+    aspect-ratio: 1/1;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+    }
+  }
+  
+  // Track info
+  .track-info {
+    text-align: center;
+    margin: 24px 0;
+    
+    h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: $light-text;
+      margin-bottom: 8px;
+      padding: 0 16px;
+    }
+    
+    p {
+      font-size: 18px;
+      color: $medium-text;
+      margin: 0;
+      padding: 0 16px;
+    }
+  }
+  
+  // Time and progress
+  .time-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 16px 0;
+    padding: 0 8px;
+    width: 100%;
+    
+    span {
+      font-size: 14px;
+      color: $medium-text;
+      min-width: 45px;
+    }
+    
+    ion-range {
+      --bar-background: rgba(255, 255, 255, 0.2);
+      --bar-background-active: #{$tab-indicator};
+      --knob-background: #{$light-text};
+      --knob-size: 14px;
+      --bar-height: 4px;
+      --pin-background: #{$primary-purple};
+      --pin-color: #{$light-text};
+      padding: 0;
+      margin: 0 8px;
+      flex: 1;
+    }
+  }
+  
+  // Playback controls
+  .controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 32px 0;
+    width: 100%;
+    
+    ion-button {
+      --color: #{$light-text};
+      --background: transparent;
+      --background-activated: rgba(255, 255, 255, 0.1);
+      --background-focused: rgba(255, 255, 255, 0.1);
+      --background-hover: rgba(255, 255, 255, 0.05);
+      --padding-start: 12px;
+      --padding-end: 12px;
+      margin: 0 8px;
+      
+      &.control-button {
+        ion-icon {
+          font-size: 32px;
+        }
+      }
+      
+      &.play-button {
+        --background: #{$primary-purple};
+        --background-activated: #{$secondary-purple};
+        --background-focused: #{$secondary-purple};
+        --background-hover: #{$secondary-purple};
+        height: 64px;
+        width: 64px;
+        --border-radius: 50%;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        
+        ion-icon {
+          font-size: 32px;
+        }
+      }
+    }
+  }
+}
+
+// Media queries for different device sizes
+@media (min-width: 768px) {
+  .now-playing-content {
+    --padding-start: 24px;
+    --padding-end: 24px;
+    
+    .artwork-container {
+      max-width: 400px;
+    }
+    
+    .controls {
+      ion-button {
+        &.play-button {
+          height: 72px;
+          width: 72px;
+        }
+      }
+    }
+  }
+}
+
+// iOS safe area handling
+.ios {
+  .now-playing-content {
+    --padding-bottom: calc(16px + env(safe-area-inset-bottom, 0));
+  }
+}
+
+// Dark mode adjustments
+@media (prefers-color-scheme: dark) {
+  :host {
+    --ion-color-step-50: #0d0d0d;
+    --ion-color-step-100: #1a1a1a;
+    --ion-color-step-150: #262626;
+    --ion-color-step-200: #333333;
+    --ion-color-step-250: #404040;
+    --ion-color-step-300: #4d4d4d;
+    --ion-color-step-350: #595959;
+    --ion-color-step-400: #666666;
+    --ion-color-step-450: #737373;
+    --ion-color-step-500: #808080;
+    --ion-color-step-550: #8c8c8c;
+    --ion-color-step-600: #999999;
+    --ion-color-step-650: #a6a6a6;
+    --ion-color-step-700: #b3b3b3;
+    --ion-color-step-750: #bfbfbf;
+    --ion-color-step-800: #cccccc;
+    --ion-color-step-850: #d9d9d9;
+    --ion-color-step-900: #e6e6e6;
+    --ion-color-step-950: #f2f2f2;
+  }
+}
+
+.controls ion-button:last-child {
+  margin-left: 12px;
+}

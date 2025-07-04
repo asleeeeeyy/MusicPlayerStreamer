@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Musify - Local Files</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <input type="file" accept="audio/*" style="display: none;" #fileInput (change)="onFileSelected($event)" />
+  <ion-button expand="block" color="secondary" (click)="fileInput.click()">
+    <ion-icon name="cloud-upload-outline" slot="start"></ion-icon>
+    Choose Audio File
+  </ion-button>
+
+
+  <ion-list *ngIf="localFiles.length > 0">
+    <ion-item *ngFor="let track of localFiles" (click)="playStream(track)">
+      <ion-thumbnail slot="start">
+        <img [src]="track.image || 'assets/placeholder.png'" />
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ track.title }}</h2>
+        <p>{{ track.artist }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-text *ngIf="localFiles.length === 0" color="medium">
+    <p class="ion-padding">No local files added yet.</p>
+  </ion-text>
+</ion-content>
+
+<ion-footer *ngIf="currentTrack" class="mini-player-footer" (click)="goToNowPlaying()">
+  <ion-toolbar>
+    <ion-item lines="none">
+      <ion-thumbnail slot="start">
+        <img [src]="currentTrack.image || 'assets/placeholder.png'" alt="Album art" />
+      </ion-thumbnail>
+      <ion-label>
+        <h3>{{ currentTrack.title }}</h3>
+        <p>{{ currentTrack.artist }}</p>
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" (click)="playPrevious(); $event.stopPropagation()">
+          <ion-icon name="play-skip-back"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" (click)="togglePlayPause(); $event.stopPropagation()">
+          <ion-icon [name]="isPlaying ? 'pause' : 'play'"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" (click)="playNext(); $event.stopPropagation()">
+          <ion-icon name="play-skip-forward"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-toolbar>
+</ion-footer>
+
+<ion-footer class="main-tab-footer">
+  <ion-tab-bar>
+    <ion-tab-button [selected]="false" (click)="gotoTab('home')">
+      <ion-icon name="search"></ion-icon>
+      <ion-label>Discover</ion-label>
+    </ion-tab-button>
+    <ion-tab-button [selected]="true" (click)="gotoTab('local-music')">
+      <ion-icon name="folder"></ion-icon>
+      <ion-label>Local Files</ion-label>
+    </ion-tab-button>
+    <ion-tab-button [selected]="false" (click)="gotoTab('playlists')">
+      <ion-icon name="list"></ion-icon>
+      <ion-label>Playlist</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-footer>

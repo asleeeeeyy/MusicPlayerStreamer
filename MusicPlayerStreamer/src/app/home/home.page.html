@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Musify</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-searchbar
+    [(ngModel)]="searchQuery"
+    (ionInput)="searchMusic()"
+    placeholder="Search songs..."
+    debounce="300"
+    showCancelButton="focus"
+  ></ion-searchbar>
+
+  <ion-segment [(ngModel)]="selectedGenre" (ionChange)="loadTracksByGenre(selectedGenre)" color="primary">
+    <ion-segment-button value="taylorswift">Taylor Swift</ion-segment-button>
+    <ion-segment-button value="edsheeran">Ed Sheeran</ion-segment-button>
+    <ion-segment-button value="arianagrande">Ariana Grande</ion-segment-button>
+  </ion-segment>
+
+  <ion-spinner *ngIf="isSearching" name="crescent" class="spinner-center"></ion-spinner>
+
+  <ion-list *ngIf="searchResults.length > 0 && !isSearching">
+    <ion-item *ngFor="let track of searchResults" (click)="playStream(track)">
+      <ion-thumbnail slot="start">
+        <img [src]="track.image" />
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ track.title }}</h2>
+        <p>{{ track.artist }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="searchResults.length === 0 && !isSearching">
+    <ion-item *ngFor="let track of genreTracks" (click)="playStream(track)">
+      <ion-thumbnail slot="start">
+        <img [src]="track.image" />
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ track.title }}</h2>
+        <p>{{ track.artist }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<app-mini-player
+  [currentTrack]="currentTrack"
+  [isPlaying]="isPlaying"
+  (playPrevious)="playPrevious()"
+  (togglePlayPause)="togglePlayPause()"
+  (playNext)="playNext()"
+  (goToNowPlaying)="goToNowPlaying()"
+></app-mini-player>
+
+<ion-footer style="z-index: 10; background: #fff;">
+  <ion-tab-bar>
+    <ion-tab-button [selected]="true" (click)="gotoTab('home')">
+      <ion-icon name="search"></ion-icon>
+      <ion-label>Discover</ion-label>
+    </ion-tab-button>
+    <ion-tab-button [selected]="false" (click)="gotoTab('local-music')">
+      <ion-icon name="folder"></ion-icon>
+      <ion-label>Local Files</ion-label>
+    </ion-tab-button>
+    <ion-tab-button [selected]="false" (click)="gotoTab('playlists')">
+      <ion-icon name="list"></ion-icon>
+      <ion-label>Playlist</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-footer>
